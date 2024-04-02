@@ -22,11 +22,40 @@ class CarritoController extends Controller
     }
 
     public function verCarrito()
-    {
-        // Obtener todos los productos en el carrito para mostrarlos en la vista del carrito
-        $carritoProductos = Carrito::with('producto')->get();
+{
+    // Obtener todos los productos en el carrito para mostrarlos en la vista del carrito
+    $carritoProductos = Carrito::with('producto')->get();
 
-        // Mostrar la vista del carrito con los productos
-        return view('carrito', compact('carritoProductos'));
+    // Inicializar el total de precios y cantidad de productos
+    $totalPrecio = 0;
+    $totalCantidad = $carritoProductos->count();
+
+    // Calcular el total de los precios de los productos en el carrito
+    foreach ($carritoProductos as $carritoProducto) {
+        $totalPrecio += $carritoProducto->producto->precio;
+    }
+
+    // Mostrar la vista del carrito con los productos y el total de precios
+    return view('carrito', compact('carritoProductos', 'totalPrecio', 'totalCantidad'));
+}
+
+
+
+    public function eliminarProducto(Carrito $carritoProducto)
+    {
+        // Aquí puedes implementar la lógica para eliminar el producto del carrito
+        $carritoProducto->delete();
+
+        // Redirigir a alguna vista o ruta después de eliminar el producto del carrito
+        return redirect()->route('carrito')->with('success', 'Producto eliminado del carrito correctamente.');
+    }
+
+    public function pagar()
+    {
+        // Vaciar el carrito eliminando todos los productos
+        Carrito::truncate();
+
+        // Redirigir a alguna vista o ruta después de pagar y vaciar el carrito
+        return redirect()->route('carrito')->with('success', '¡Pago exitoso! Carrito vaciado.');
     }
 }

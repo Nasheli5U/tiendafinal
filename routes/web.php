@@ -70,3 +70,7 @@ Route::view('/dashboard', 'dashboard')->name('dashboard');
 Route::view('/profile', 'profile')->name('profile');
 
 Route::post('/carrito/agregar/{producto}', [CarritoController::class, 'agregarProducto'])->name('carrito.agregar');
+Route::delete('/carrito/{carritoProducto}', [CarritoController::class, 'eliminarProducto'])->name('carrito.eliminar');
+
+
+Route::post('/carrito/pagar', [CarritoController::class, 'pagar'])->name('carrito.pagar');
