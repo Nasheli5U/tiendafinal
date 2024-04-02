@@ -25,7 +25,7 @@ use App\Http\Controllers\CarritoController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/almacen', [HomeController::class, 'almacen'])->name('almacen');
-Route::get('/carrito', [HomeController::class, 'carrito'])->name('carrito');
+Route::get('/carrito', [CarritoController::class, 'verCarrito'])->name('carrito');
 Route::get('/contacto', [HomeController::class, 'contacto'])->name('contacto');
 
 Route::middleware(['auth'])->group(function () {

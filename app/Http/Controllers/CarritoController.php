@@ -10,10 +10,6 @@ class CarritoController extends Controller
 {
     protected $table = 'carrito';
 
-    public function producto()
-    {
-        return $this->belongsTo(Producto::class, 'producto_id');
-    }
     public function agregarProducto(Request $request, Producto $producto)
     {
         // Lógica para agregar el producto al carrito
@@ -21,10 +17,16 @@ class CarritoController extends Controller
         $carrito->producto_id = $producto->id;
         $carrito->save();
 
+        // Redirigir a la vista del carrito
+        return redirect()->route('carrito');
+    }
+
+    public function verCarrito()
+    {
         // Obtener todos los productos en el carrito para mostrarlos en la vista del carrito
         $carritoProductos = Carrito::with('producto')->get();
 
-        // Redirigir a la vista del carrito y pasar los productos del carrito como datos
+        // Mostrar la vista del carrito con los productos
         return view('carrito', compact('carritoProductos'));
     }
 }

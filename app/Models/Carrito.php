@@ -16,18 +16,23 @@ class Carrito extends Model
         return $this->belongsTo(Producto::class, 'producto_id');
     }
 
-    public static function agregarProductoAlCarrito(Request $request, Producto $producto)
+    public function agregarProducto(Request $request, Producto $producto)
     {
-        // Crear un nuevo registro en la tabla carrito con los detalles del producto
-        Carrito::create([
-            'producto_id' => $producto->id,
-            // Puedes agregar más campos aquí según sea necesario, como la cantidad
-        ]);
+        // Lógica para agregar el producto al carrito
+        $carrito = new Carrito();
+        $carrito->producto_id = $producto->id;
+        $carrito->save();
 
-        // Obtener los productos en el carrito para mostrarlos en la vista del carrito
+        // Redirigir a la vista del carrito
+        return redirect()->route('carrito');
+    }
+
+    public function verCarrito()
+    {
+        // Obtener todos los productos en el carrito para mostrarlos en la vista del carrito
         $carritoProductos = Carrito::with('producto')->get();
 
-        // Redirigir a la vista del carrito y pasar los productos del carrito como datos
+        // Mostrar la vista del carrito con los productos
         return view('carrito', compact('carritoProductos'));
     }
 }
