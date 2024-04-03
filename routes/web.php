@@ -74,3 +74,4 @@ Route::delete('/carrito/{carritoProducto}', [CarritoController::class, 'eliminar
 
 
 Route::post('/carrito/pagar', [CarritoController::class, 'pagar'])->name('carrito.pagar');
+Route::get('/carrito/cantidad', [CarritoController::class, 'cantidad'])->name('carrito.cantidad');

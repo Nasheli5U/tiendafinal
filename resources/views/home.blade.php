@@ -21,26 +21,30 @@
                 </svg>
             </button>
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                    <li>
-                        <a class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Inicio</a>
-                    </li>
-                    <li>
-                        <a class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" href="{{ route('almacen') }}">Almacen</a>
-                    </li>
-                    <li>
-                        <a class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" href="{{ route('carrito') }}">
-                            Carrito
-                            @if (session('carrito'))
-                                <span class="bg-blue-500 text-white px-2 py-1 rounded-full text-xs">{{ count(session('carrito')) }}</span>
-                            @endif
-                        </a>        
-                    </li>
-                    <li>
-                        <a class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" href="{{ route('contacto') }}">Contactanos</a>
-                    </li>
-                </ul>
-            </div>
+                
+            <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+              <li>
+                  <a class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Inicio</a>
+              </li>
+              <li>
+                  <a class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" href="{{ route('almacen') }}">Almacen</a>
+              </li>
+              <li>
+              <li>
+              <a href="{{ route('carrito') }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                  Carrito
+                  @if ($cantidadCarrito > 0)
+                      <span class="bg-blue-500 text-white px-2 py-1 rounded-full text-xs" id="cantidad-carrito">{{ $cantidadCarrito }}</span>
+                  @endif
+              </a>
+
+
+              </li>
+              <li>
+                  <a class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" href="{{ route('contacto') }}">Contactanos</a>
+              </li>
+           </ul>
+          </div>
         </div>
     </nav>
     <h1>¡PRODUCTOS!</h1>
@@ -60,26 +64,48 @@
         </div>
         @endforeach
     </div>
-
     <script>
-        $(document).ready(function() {
-            $('.btnAgregarCarrito').click(function() {
-                var productoId = $(this).data('producto-id');
-                $.ajax({
-                    url: $('#formAgregarCarrito' + productoId).attr('action'),
-                    type: 'POST',
-                    data: $('#formAgregarCarrito' + productoId).serialize(),
-                    success: function(response) {
-                        // Opcional: muestra un mensaje o realiza alguna acción en la interfaz de usuario para indicar que el producto se ha agregado al carrito
-                        alert('Producto agregado al carrito');
-                    },
-                    error: function(xhr, status, error) {
-                        // Maneja errores si es necesario
-                        console.error(error);
-                    }
-                });
-            });
+$(document).ready(function() {
+    $('.btnAgregarCarrito').click(function() {
+        var productoId = $(this).data('producto-id');
+        $.ajax({
+            url: $('#formAgregarCarrito' + productoId).attr('action'),
+            type: 'POST',
+            data: $('#formAgregarCarrito' + productoId).serialize(),
+            success: function(response) {
+                // Opcional: muestra un mensaje o realiza alguna acción en la interfaz de usuario para indicar que el producto se ha agregado al carrito
+                alert('Producto agregado al carrito');
+                // Actualizar la cantidad de productos en el carrito
+                actualizarCantidadCarrito();
+            },
+            error: function(xhr, status, error) {
+                // Maneja errores si es necesario
+                console.error(error);
+            }
         });
-    </script>
+    });
+});
+
+// Función para actualizar la cantidad de productos en el carrito
+function actualizarCantidadCarrito() {
+    $.ajax({
+        url: "{{ route('carrito.cantidad') }}", // Aquí usamos la ruta definida en tu archivo de rutas
+        method: "GET",
+        success: function(response) {
+            $('#cantidad-carrito').text(response);
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
+
+// Llama a la función para actualizar la cantidad de productos en el carrito cuando se carga la página
+$(document).ready(function() {
+    actualizarCantidadCarrito();
+});
+</script>
+
+
 </body>
 </html>

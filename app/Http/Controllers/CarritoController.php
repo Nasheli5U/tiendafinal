@@ -58,4 +58,13 @@ class CarritoController extends Controller
         // Redirigir a alguna vista o ruta después de pagar y vaciar el carrito
         return redirect()->route('carrito')->with('success', '¡Pago exitoso! Carrito vaciado.');
     }
+    public function obtenerCantidadCarrito()
+    {
+        // Lógica para obtener la cantidad de productos en el carrito
+        $cantidad = Carrito::count();
+    
+        return $cantidad;
+    }
+    
+
 }

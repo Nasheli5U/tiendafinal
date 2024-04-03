@@ -3,15 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Producto; // Importa el modelo Producto
+use App\Models\Producto;
+use App\Models\Carrito; // Importa el modelo Producto
 
 class HomeController extends Controller
 {
     public function index()
-    {
-        $productos = Producto::all(); // Obtener todos los productos desde la base de datos
-        return view('home', compact('productos')); // Pasar los productos a la vista
-    }
+{
+    // Obtener todos los productos desde la base de datos
+    $productos = Producto::all();
+
+    // Obtener la cantidad de productos en el carrito
+    $cantidadCarrito = app('App\Http\Controllers\CarritoController')->obtenerCantidadCarrito();
+
+    // Pasar los datos de productos y del carrito a la vista home
+    return view('home', compact('productos', 'cantidadCarrito'));
+}
+
 
     public function almacen()
     {
@@ -27,5 +35,6 @@ class HomeController extends Controller
     {
         return view('contacto');
     }
+
 
 }
