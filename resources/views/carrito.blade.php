@@ -43,7 +43,6 @@
                 </ul>
             </div>
         </div>
-    </nav>
     <h1>Carrito de Compras</h1>
     <div class="relative overflow-x-auto">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -83,7 +82,7 @@
             @endforeach
         </tbody>
         <tfoot>
-            <tr class="font-semibold text-gray-900 dark:text-black">
+            <tr class="font-semibold text-gray-900 dark:text-white">
                 <th scope="row" class="px-6 py-3 text-base">Total</th>
                 <td class="px-6 py-3">{{ $totalCantidad }}</td>
                 <td class="px-6 py-3">${{ $totalPrecio }}</td>
@@ -91,6 +90,7 @@
         </tfoot>
     </table>
 </div>
+</nav>
 
 
 
@@ -104,7 +104,7 @@
     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
       <form>
         <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          User Information
+          Imformacion para entrega 
         </h6>
         <div class="flex flex-wrap">
           <div class="w-full lg:w-6/12 px-4">

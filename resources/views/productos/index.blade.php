@@ -6,9 +6,10 @@
 @section('content')
 
 <main class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-8">Administrar Productos</h1>
+<h1 class="text-3xl font-bold mb-8 text-white">Administrar Productos</h1>
     <!-- Botón para agregar nuevo producto -->
     <a href="{{ route('productos.create') }}" class="btn btn-primary mb-3">Agregar Nuevo Producto</a>
+    <br>
     <!-- Tabla para mostrar los productos existentes -->
     <div class="relative overflow-x-auto">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
