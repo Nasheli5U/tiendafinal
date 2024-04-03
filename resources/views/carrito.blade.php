@@ -43,7 +43,8 @@
                 </ul>
             </div>
         </div>
-    <h1>Carrito de Compras</h1>
+
+        <h1>Carrito de Compras</h1>
     <div class="relative overflow-x-auto">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
@@ -97,29 +98,29 @@
 
 <!-- component -->
 
-<section class=" py-1 bg-blueGray-50">
-<div class="w-full lg:w-8/12 px-4 mx-auto mt-6">
-  <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
-   
-    <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-      <form>
-        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          Imformacion para entrega 
-        </h6>
+<section class="py-1 bg-blueGray-50">
+    <div class="w-full lg:w-8/12 px-4 mx-auto mt-6">
+        <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
+            <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                <form action="{{ route('carrito.pagar') }}" method="POST">
+                    @csrf
+                    <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                        Información para entrega 
+                    </h6>
         <div class="flex flex-wrap">
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
                 Email 
               </label>
-              <input type="email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="jesse@example.com">
+              <input type="email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="jesse@example.com">
             </div>
           </div>
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
                 Nombres              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="Lucky">
+              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Lucky">
             </div>
           </div>
           <div class="w-full lg:w-6/12 px-4">
@@ -127,78 +128,78 @@
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
                 Apellidos
               </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="Jesse">
+              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Jesse">
             </div>
           </div>
         </div>
 
         <hr class="mt-6 border-b-1 border-blueGray-300">
-
-        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-Informacion de contacto        </h6>
-        <div class="flex flex-wrap">
-          <div class="w-full lg:w-12/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Direccion
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
-            </div>
-          </div>
-          <div class="w-full lg:w-4/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Pais
-              </label>
-              <input type="email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="Peru">
-            </div>
-          </div>
-          <div class="w-full lg:w-4/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Departamento
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="Arequipa">
-            </div>
-          </div>
-          <div class="w-full lg:w-4/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-Ciudad              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="Camana">
-            </div>
-          </div>
-        </div>
-
-        <hr class="mt-6 border-b-1 border-blueGray-300">
-
-        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          Referencias
-        </h6>
-        <div class="flex flex-wrap">
-          <div class="w-full lg:w-12/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Direccion de refencia o algun contacto 
-              </label>
-              <textarea type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" rows="4"> Refencias ejm. Cerca al mercado, numero para comunicarse</textarea>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div class="flex justify-end mt-4">
-        <form action="{{ route('carrito.pagar') }}" method="POST">
-            @csrf
-            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                Pagar
-            </button>
-        </form>
-    </div>
-
+ 
 </div>
+
+<h2>Información de ENTREGA</h2>
+<form action="{{ route('carrito.guardarInformacionEnvio') }}" method="POST">
+    @csrf
+    <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">Información de contacto</h6>
+    <div class="flex flex-wrap">
+        <!-- Dirección -->
+        <div class="w-full lg:w-12/12 px-4">
+            <div class="relative w-full mb-3">
+                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="direccion">Dirección</label>
+                <input type="text" id="direccion" name="direccion" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
+            </div>
+        </div>
+        <!-- País -->
+        <div class="w-full lg:w-4/12 px-4">
+            <div class="relative w-full mb-3">
+                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="pais">País</label>
+                <input type="text" id="pais" name="pais" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Perú">
+            </div>
+        </div>
+        <!-- Departamento -->
+        <div class="w-full lg:w-4/12 px-4">
+            <div class="relative w-full mb-3">
+                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="departamento">Departamento</label>
+                <input type="text" id="departamento" name="departamento" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Arequipa">
+            </div>
+        </div>
+        <!-- Ciudad -->
+        <div class="w-full lg:w-4/12 px-4">
+            <div class="relative w-full mb-3">
+                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="ciudad">Ciudad</label>
+                <input type="text" id="ciudad" name="ciudad" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Camana">
+            </div>
+        </div>
+    </div>
+  
+    <hr class="mt-6 border-b-1 border-blueGray-300">
+  
+    <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">Referencias</h6>
+    <div class="flex flex-wrap">
+        <!-- Referencias -->
+        <div class="w-full lg:w-12/12 px-4">
+            <div class="relative w-full mb-3">
+                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="referencias">Dirección de referencia o algún contacto</label>
+                <textarea id="referencias" name="referencias" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" rows="4" placeholder="Referencias ejm. Cerca al mercado, número para comunicarse"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Campo para ingresar RUC -->
+    <div id="ruc" class="w-full lg:w-4/12 px-4">
+        <label for="ruc" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">DNI (en caso de FACTURA ingrese su RUC):</label>
+        <input type="text" id="ruc" name="ruc" placeholder="12345678" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" required>
+    </div>
+
+     <div class="flex justify-end mt-4">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                            Pagar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 
 </body>

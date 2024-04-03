@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('productos', function (Blueprint $table) {
+        Schema::create('informacion_envios', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->text('descripcion');
-            $table->decimal('precio', 8, 2);
-            $table->string('imagen')->nullable(); // Columna para la ruta de la imagen
+            $table->string('direccion');
+            $table->string('pais');
+            $table->string('departamento');
+            $table->string('ciudad');
+            $table->text('referencias')->nullable();
+            $table->string('ruc')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('productos');
+        Schema::dropIfExists('informacion_envios');
     }
 };

@@ -17,6 +17,10 @@
                 <label for="precio" class="block text-sm font-medium text-gray-700">Precio del Producto</label>
                 <input type="number" name="precio" id="precio" class="mt-1 p-2 border rounded-md w-full" required>
             </div>
+            <div class="mb-4">
+                <label for="imagen" class="block text-sm font-medium text-gray-700">Imagen del Producto</label>
+                <input type="file" name="imagen" id="imagen" class="mt-1 p-2 border rounded-md w-full" accept="image/*" >
+            </div>
             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Guardar Producto</button>
         </form>
     </div>

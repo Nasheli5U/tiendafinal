@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Carrito;
 use App\Models\Producto;
-
+use App\Models\InformacionEnvio; 
+USE App\Models\Pedido;
 class CarritoController extends Controller
 {
     protected $table = 'carrito';
@@ -50,14 +51,35 @@ class CarritoController extends Controller
         return redirect()->route('carrito')->with('success', 'Producto eliminado del carrito correctamente.');
     }
 
-    public function pagar()
+    public function pagar(Request $request)
     {
-        // Vaciar el carrito eliminando todos los productos
-        Carrito::truncate();
+        // Crear un nuevo pedido
+        $pedido = new Pedido();
+        
+        // Crear una nueva instancia de InformacionEnvio con los datos del request
+        $informacionEnvio = InformacionEnvio::create($request->all());
+    
+        // Guardar la información de envío asociada al pedido
+        $pedido->informacion_envio()->associate($informacionEnvio);
+        $pedido->save();
 
-        // Redirigir a alguna vista o ruta después de pagar y vaciar el carrito
-        return redirect()->route('carrito')->with('success', '¡Pago exitoso! Carrito vaciado.');
+
+        // Obtener productos del carrito
+        $productosCarrito = Carrito::all();
+        foreach ($productosCarrito as $productoCarrito) {
+            $pedido->productos()->attach($productoCarrito->producto_id, ['cantidad' => $productoCarrito->cantidad]);
+        }
+    
+        // Guardar el pedido en la base de datos
+        $pedido->save();
+    
+        // Limpiar el carrito
+        Carrito::truncate(); // Esto eliminará todos los registros de la tabla 'carrito'
+    
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('carrito')->with('success', '¡Pago exitoso! Pedido generado correctamente.');
     }
+    
     public function obtenerCantidadCarrito()
     {
         // Lógica para obtener la cantidad de productos en el carrito

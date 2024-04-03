@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
 use App\Http\Controllers\AuthLoginController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\PedidosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,7 +55,7 @@ use App\Http\Controllers\ProductoController;
 Route::get('/productos/create', [ProductoController::class, 'create'])->name('productos.create');
 
 // Ruta para almacenar un nuevo producto en la base de datos
-Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');
+Route::post('/productos', 'App\Http\Controllers\ProductoController@store')->name('productos.store');
 
 // Ruta para mostrar el formulario de edición de producto
 Route::get('/productos/{producto}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
@@ -75,3 +76,7 @@ Route::delete('/carrito/{carritoProducto}', [CarritoController::class, 'eliminar
 
 Route::post('/carrito/pagar', [CarritoController::class, 'pagar'])->name('carrito.pagar');
 Route::get('/carrito/cantidad', [CarritoController::class, 'cantidad'])->name('carrito.cantidad');
+
+
+Route::post('/carrito/guardar-informacion-envio', 'CarritoController@guardarInformacionEnvio')->name('carrito.guardarInformacionEnvio');
+Route::get('/pedidos', [PedidosController::class, 'index'])->name('pedidos');
