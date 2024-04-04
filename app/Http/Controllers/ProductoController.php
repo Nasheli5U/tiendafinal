@@ -28,29 +28,21 @@ class ProductoController extends Controller
             'nombre' => 'required',
             'precio' => 'required|numeric',
             'descripcion' => 'nullable',
+            'imagen_url' => 'nullable|url', // Agrega la regla de validación para la URL de la imagen
         ];
-
-        // Si se proporciona una imagen, agrega la regla de validación correspondiente
-        if ($request->hasFile('imagen')) {
-            $rules['imagen'] = 'image|mimes:jpeg,png,jpg,gif|max:2048';
-        }
 
         // Realiza la validación de los datos del formulario
         $request->validate($rules);
 
-        // Guarda la imagen y obtén la ruta (si se proporciona una imagen)
-        $uriFoto = $request->hasFile('imagen') ? $request->file('imagen')->store('public/imagenes_productos') : null;
+        // Si se proporciona un enlace de imagen, guárdalo en la base de datos
+        $uriFoto = $request->input('imagen_url');
 
         // Crea una nueva instancia de Producto y guarda los datos en la base de datos
         $producto = new Producto();
         $producto->nombre = $request->nombre;
         $producto->precio = $request->precio;
         $producto->descripcion = $request->descripcion;
-        
-        // Si se proporciona una imagen, ajusta la ruta de la imagen para que coincida con el enlace simbólico
-        if ($uriFoto) {
-            $producto->imagen = str_replace('public/', 'storage/', $uriFoto);
-        }
+        $producto->imagen = $uriFoto; // Guarda la URL de la imagen directamente
 
         $producto->save();
 
@@ -75,19 +67,14 @@ class ProductoController extends Controller
         'nombre' => 'required',
         'precio' => 'required|numeric',
         'descripcion' => 'nullable',
-        'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Puedes agregar validación para la imagen si es necesaria
+        'imagen_url' => 'nullable|url', // Agrega la regla de validación para la URL de la imagen
     ]);
 
     // Actualiza los datos del producto con los valores del formulario
     $producto->nombre = $request->nombre;
     $producto->precio = $request->precio;
     $producto->descripcion = $request->descripcion;
-
-    // Si se proporciona una nueva imagen, guarda y actualiza la ruta de la imagen
-    if ($request->hasFile('imagen')) {
-        $uriFoto = $request->file('imagen')->store('public/imagenes_productos');
-        $producto->imagen = str_replace('public/', 'storage/', $uriFoto); // Ajusta la ruta de la imagen para que coincida con el enlace simbólico
-    }
+    $producto->imagen = $request->input('imagen_url'); // Actualiza la URL de la imagen directamente
 
     // Guarda los cambios en la base de datos
     $producto->save();

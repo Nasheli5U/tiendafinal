@@ -43,54 +43,93 @@
                 </ul>
             </div>
         </div>
-
         <h1>Carrito de Compras</h1>
-    <div class="relative overflow-x-auto">
+        <h1>Carrito de Compras</h1>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3 rounded-s-lg">
-                    Nombre del Producto
+                <th scope="col" class="px-16 py-3">
+                    <span class="sr-only">Image</span>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Cantidad
+                    Product
                 </th>
-                <th scope="col" class="px-6 py-3 rounded-e-lg">
-                    Precio
+                <th scope="col" class="px-6 py-3">
+                    Qty
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Price
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
                 </th>
             </tr>
         </thead>
         <tbody>
             @foreach($carritoProductos as $carritoProducto)
-                <tr class="bg-white dark:bg-gray-800">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $carritoProducto->producto->nombre }}
-                    </th>
-                    <td class="px-6 py-4">
-                        {{ $carritoProducto->cantidad }}
-                    </td>
-                    <td class="px-6 py-4">
-                        ${{ $carritoProducto->producto->precio }}
-                    </td>
-                    <td class="px-6 py-4">
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td class="p-4">
+                    <img src="{{ $carritoProducto->producto->imagen }}" class="w-16 md:w-32 max-w-full max-h-full" alt="{{ $carritoProducto->producto->nombre }}">
+                </td>
+                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                    {{ $carritoProducto->producto->nombre }}
+                </td>
+                
+                
+                <td class="px-6 py-4">
+                  <form action="{{ route('carrito.actualizarCantidad', $carritoProducto->id) }}" method="POST">
+                      @csrf
+                      @method('PUT')
+                      <div class="flex items-center">
+                          <!-- Botón para reducir cantidad -->
+                          <button type="button" onclick="decrementQuantity(this)" class="inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                              <span class="sr-only">Reducir Cantidad</span>
+                              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+                              </svg>
+                          </button>
+                          <!-- Input para ingresar la cantidad -->
+                          <div>
+                              <input type="number" name="cantidad" value="{{ $carritoProducto->cantidad }}" class="bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" required>
+                          </div>
+                          <!-- Botón para incrementar cantidad -->
+                          <button type="button" onclick="incrementQuantity(this)" class="inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                              <span class="sr-only">Incrementar Cantidad</span>
+                              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                              </svg>
+                          </button>
+                      </div>
+                      <!-- Botón de enviar formulario oculto -->
+                      <button type="submit" class="hidden">Actualizar Cantidad</button>
+                  </form>
+              </td>
+
+                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                    ${{ $carritoProducto->producto->precio }}
+                </td>
+                <td class="px-6 py-4">
                         <form action="{{ route('carrito.eliminar', $carritoProducto->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline">Eliminar</button>
                         </form>
                     </td>
-                </tr>
+            </tr>
             @endforeach
         </tbody>
         <tfoot>
             <tr class="font-semibold text-gray-900 dark:text-white">
                 <th scope="row" class="px-6 py-3 text-base">Total</th>
-                <td class="px-6 py-3">{{ $totalCantidad }}</td>
-                <td class="px-6 py-3">${{ $totalPrecio }}</td>
+                <td class="px-6 py-3"></td>
+                <td id="totalCantidad" class="px-6 py-3">{{ $totalCantidad }}</td>
+                <td id="totalPrecio" class="px-6 py-3">${{ $totalPrecio }}</td> <!-- Mostrar el total del precio aquí -->
             </tr>
         </tfoot>
     </table>
 </div>
+
 </nav>
 
 
@@ -146,7 +185,7 @@
         <div class="w-full lg:w-12/12 px-4">
             <div class="relative w-full mb-3">
                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="direccion">Dirección</label>
-                <input type="text" id="direccion" name="direccion" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
+                <input type="text" id="direccion" name="direccion" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" required>
             </div>
         </div>
         <!-- País -->
@@ -192,6 +231,8 @@
     </div>
 
      <div class="flex justify-end mt-4">
+
+     
                         <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                             Pagar
                         </button>
@@ -201,6 +242,34 @@
         </div>
     </div>
 </section>
+
+
+<script>
+    // Función para incrementar la cantidad
+    function incrementQuantity(button) {
+        var input = button.parentElement.querySelector('input[type="number"]');
+        input.stepUp();
+        updateTotalQuantity();
+    }
+
+    // Función para reducir la cantidad
+    function decrementQuantity(button) {
+        var input = button.parentElement.querySelector('input[type="number"]');
+        input.stepDown();
+        updateTotalQuantity();
+    }
+
+    // Función para actualizar el total de la cantidad de productos
+    function updateTotalQuantity() {
+        var totalCantidadElement = document.getElementById('totalCantidad');
+        var totalCantidad = 0;
+        var cantidadInputs = document.querySelectorAll('input[name="cantidad"]');
+        cantidadInputs.forEach(function(input) {
+            totalCantidad += parseInt(input.value);
+        });
+        totalCantidadElement.textContent = totalCantidad;
+    }
+</script>
 
 </body>
 </html>

@@ -8,6 +8,8 @@ use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
 use App\Http\Controllers\AuthLoginController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\PedidosController;
+use App\Http\Controllers\ContactController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -80,3 +82,19 @@ Route::get('/carrito/cantidad', [CarritoController::class, 'cantidad'])->name('c
 
 Route::post('/carrito/guardar-informacion-envio', 'CarritoController@guardarInformacionEnvio')->name('carrito.guardarInformacionEnvio');
 Route::get('/pedidos', [PedidosController::class, 'index'])->name('pedidos');
+
+Route::put('/pedidos/{pedido}/actualizar-estado', [PedidosController::class, 'actualizarEstado'])->name('pedido.actualizar_estado');
+
+Route::delete('/pedido/{pedido}/eliminar', [PedidosController::class, 'eliminar'])->name('pedido.eliminar');
+
+Route::put('/carrito/{carritoProducto}', 'CarritoController@actualizarCantidad')->name('carrito.actualizarCantidad');
+
+
+// Ruta para mostrar el formulario de edición del estado de un pedido
+Route::get('/pedido/{pedido}/editar', [PedidosController::class, 'editarEstado'])->name('pedido.editar_estado');
+
+Route::get('/contacto', [ContactController::class, 'showContactForm'])->name('contacto');
+Route::post('/contacto', [ContactController::class, 'submitContactForm']);
+
+// Ruta para actualizar el estado de un pedido
+Route::put('/pedido/{pedido}/actualizar-estado', [PedidosController::class, 'actualizarEstado'])->name('pedido.actualizar_estado');

@@ -30,7 +30,7 @@
                     <td class="px-6 py-4">{{ $producto->nombre }}</td>
                     <td class="px-6 py-4">
                         @if($producto->imagen)
-                        <img src="{{ asset($producto->imagen) }}" alt="Imagen del producto">
+                        <img src="{{ asset($producto->imagen) }}" alt="Imagen del producto" style="max-width: 150px; max-height: 150px;">
                         @else
                             Sin imagen
                         @endif

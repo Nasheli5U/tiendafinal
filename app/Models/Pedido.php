@@ -18,4 +18,13 @@ class Pedido extends Model
     {
         return $this->belongsToMany(Producto::class, 'pedido_producto')->withPivot('cantidad');
     }
+
+    public function cambiarEstado($nuevoEstado)
+    {
+        $this->estado = $nuevoEstado;
+        $this->save();
+    }
+
 }
+
+

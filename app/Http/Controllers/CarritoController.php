@@ -89,4 +89,25 @@ class CarritoController extends Controller
     }
     
 
+    public function actualizarCantidad(Request $request, Carrito $carritoProducto)
+{
+    $request->validate([
+        'cantidad' => 'required|numeric|min:1', // Validar que la cantidad sea un número mayor o igual a 1
+    ]);
+
+    $carritoProducto->update(['cantidad' => $request->cantidad]);
+
+    // Recalcular el precio total del carrito
+    $totalPrecio = 0;
+    $carritoProductos = Carrito::with('producto')->get();
+    foreach ($carritoProductos as $carritoProducto) {
+        $totalPrecio += $carritoProducto->producto->precio * $carritoProducto->cantidad;
+    }
+
+    // Actualizar el precio total del carrito en la sesión (o en la base de datos, si es necesario)
+    session(['totalPrecio' => $totalPrecio]);
+
+    return redirect()->back()->with('success', 'Cantidad actualizada correctamente');
+}
+
 }

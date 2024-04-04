@@ -18,9 +18,10 @@
                 <input type="number" name="precio" id="precio" class="mt-1 p-2 border rounded-md w-full" required>
             </div>
             <div class="mb-4">
-                <label for="imagen" class="block text-sm font-medium text-gray-700">Imagen del Producto</label>
-                <input type="file" name="imagen" id="imagen" class="mt-1 p-2 border rounded-md w-full" accept="image/*" >
+                <label for="imagen_url" class="block text-sm font-medium text-gray-700">URL de la Imagen del Producto</label>
+                <input type="url" name="imagen_url" id="imagen_url" class="mt-1 p-2 border rounded-md w-full" required>
             </div>
+            
             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Guardar Producto</button>
         </form>
     </div>

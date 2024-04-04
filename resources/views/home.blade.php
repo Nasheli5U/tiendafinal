@@ -47,11 +47,18 @@
           </div>
         </div>
     </nav>
-    <h1>¡PRODUCTOS!</h1>
+    <h1>¡PRODUCTOS wiuuu!</h1>
     <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         @foreach($productos as $producto)
         <div>
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $producto->nombre }}</h5>
+            <p class="px-6 py-4">
+                        @if($producto->imagen)
+                        <img src="{{ asset($producto->imagen) }}" alt="Imagen del producto">
+                        @else
+                            Sin imagen
+                        @endif
+            </p>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">${{ $producto->precio }}</p>
             <form id="formAgregarCarrito{{ $producto->id }}" action="{{ route('carrito.agregar', $producto->id) }}" method="POST">
                 @csrf
