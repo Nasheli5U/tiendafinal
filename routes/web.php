@@ -98,3 +98,6 @@ Route::post('/contacto', [ContactController::class, 'submitContactForm']);
 
 // Ruta para actualizar el estado de un pedido
 Route::put('/pedido/{pedido}/actualizar-estado', [PedidosController::class, 'actualizarEstado'])->name('pedido.actualizar_estado');
+
+
+Route::get('/mensajes', [ContactController::class, 'index'])->name('mensajes');

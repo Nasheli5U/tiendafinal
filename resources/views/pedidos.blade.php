@@ -53,5 +53,10 @@
             @endforeach
         </tbody>
     </table>
+    
 </div>
+<br>
+
+    <a href="{{ route('admin') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg mr-2">Regresar</a>
+
 @endsection

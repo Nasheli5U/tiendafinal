@@ -3,7 +3,7 @@
 
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Tienda HEN</span>
             </a>
@@ -44,10 +44,10 @@
                 <div class="grid grid-cols-1 md:grid-cols-2">
                     <div class="p-6 mr-2 bg-gray-100 dark:bg-gray-800 sm:rounded-lg">
                         <h1 class="text-4xl sm:text-5xl text-gray-800 dark:text-white font-extrabold tracking-tight">
-                            Get in touch
+                           Te contactamos
                         </h1>
                         <p class="text-normal text-lg sm:text-2xl font-medium text-gray-600 dark:text-gray-400 mt-2">
-                            Fill in the form to start a conversation
+                            Rellena el formulario para ponernos en contacto lo mas pronto posible
                         </p>
 
                         <div class="flex items-center mt-8 text-gray-600 dark:text-gray-400">
@@ -66,7 +66,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                             </svg>
                             <div class="ml-4 text-md tracking-wide font-semibold w-40">
-                                +44 1234567890
+                                +51 901834839
                             </div>
                         </div>
 
@@ -75,15 +75,17 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             </svg>
                             <div class="ml-4 text-md tracking-wide font-semibold w-40">
-                                info@acme.org
+                                info@tienda.org
                             </div>
                         </div>
                     </div>
 
-                    <form class="p-6 flex flex-col justify-center">
+                   
+                    <form action="{{ route('contacto') }}" method="POST" class="p-6 flex flex-col justify-center">
+                        @csrf
                         <div class="flex flex-col">
-                            <label for="name" class="hidden">Full Name</label>
-                            <input type="name" name="name" id="name" placeholder="Full Name" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-100 font-semibold focus:border-indigo-500 focus:outline-none">
+                            <label for="name" class="hidden">Nombre completo</label>
+                            <input type="text" name="name" id="name" placeholder="Nombre completo" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-100 font-semibold focus:border-indigo-500 focus:outline-none">
                         </div>
 
                         <div class="flex flex-col mt-2">
@@ -92,20 +94,21 @@
                         </div>
 
                         <div class="flex flex-col mt-2">
-                            <label for="tel" class="hidden">Number</label>
-                            <input type="tel" name="tel" id="tel" placeholder="Telephone Number" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-100 font-semibold focus:border-indigo-500 focus:outline-none">
+                            <label for="tel" class="hidden">Numero</label>
+                            <input type="tel" name="tel" id="tel" placeholder="Numero de telefono" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-100 font-semibold focus:border-indigo-500 focus:outline-none">
                         </div>
 
                         <div class="flex flex-col mt-2">
-                            <label for="tel" class="hidden">Mensaje</label>
-                            <input type="text" name="tel" id="tel" placeholder="Mensaje" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-100 font-semibold focus:border-indigo-500 focus:outline-none">
+                            <label for="message" class="hidden">Mensaje</label>
+                            <textarea name="message" id="message" placeholder="Mensaje (en caso de reclamos indicar su DNI/RUC y fecha de pedido.)" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-100 font-semibold focus:border-indigo-500 focus:outline-none"></textarea>
                         </div>
 
-
                         <button type="submit" class="md:w-32 bg-indigo-600 hover:bg-blue-dark text-white font-bold py-3 px-6 rounded-lg mt-3 hover:bg-indigo-500 transition ease-in-out duration-300">
-                            Submit
+                            Enviar
                         </button>
                     </form>
+
+
                 </div>
             </div>
         </div>
